@@ -1,13 +1,35 @@
 
 import Link from "next/link";
 import { Bell, Home, LineChart, Package, Package2, Settings, ShoppingCart, Users } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import SystemStatusWidget from "../widgets/SystemStatusWidget";
+import { useEffect } from "react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const supabase = useSupabaseClient();
+  const user = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    async function checkOnboarding() {
+      if (!user) return;
+      const { data: creds } = await supabase
+        .from('client_api_credentials')
+        .select('profile_completion_pct')
+        .single();
+
+      // যদি প্রোফাইল ১০০% না হয়, তবে সেটিংস পেজে রিডাইরেক্ট করবে
+      if (!creds || creds.profile_completion_pct < 100) {
+        router.push('/settings/integrations?onboarding=true');
+      }
+    }
+    checkOnboarding();
+  }, [user, supabase, router]);
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
