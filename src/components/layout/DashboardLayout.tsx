@@ -5,14 +5,27 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import SystemStatusWidget from "../widgets/SystemStatusWidget";
-import { useEffect } from "react";
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import TestModeWidget from "../widgets/TestModeWidget";
+import { useEffect, useState } from "react";
+import { createClient, User } from '@supabase/supabase-js';
 import { useRouter } from "next/router";
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const supabase = useSupabaseClient();
-  const user = useUser();
+  const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    async function getUser() {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    }
+    getUser();
+  }, []);
 
   useEffect(() => {
     async function checkOnboarding() {
@@ -28,7 +41,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       }
     }
     checkOnboarding();
-  }, [user, supabase, router]);
+  }, [user, router]);
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -81,6 +94,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col">
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <SystemStatusWidget />
+          <TestModeWidget />
           {children}
         </main>
       </div>
