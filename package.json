@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.15.0",
+    "@supabase/supabase-js": "^2.98.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
+    "recharts": "^3.7.0",
+    "supabase": "^2.76.17",
+    "tailwind-merge": "^3.5.0"
+  }
+}
