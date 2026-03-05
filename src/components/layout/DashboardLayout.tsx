@@ -22,7 +22,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         .select('profile_completion_pct')
         .single();
 
-      // যদি প্রোফাইল ১০০% না হয়, তবে সেটিংস পেজে রিডাইরেক্ট করবে
+      // If the profile is not 100% complete, it will redirect to the settings page
       if (!creds || creds.profile_completion_pct < 100) {
         router.push('/settings/integrations?onboarding=true');
       }
