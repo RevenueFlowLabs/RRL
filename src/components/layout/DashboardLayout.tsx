@@ -5,6 +5,7 @@ import { Bell, Home, LineChart, Package, Package2, Settings, ShoppingCart, Users
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import SystemStatusWidget from "../widgets/SystemStatusWidget";
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -57,6 +58,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </div>
       <div className="flex flex-col">
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <SystemStatusWidget />
           {children}
         </main>
       </div>
