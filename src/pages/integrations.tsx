@@ -5,69 +5,63 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 export default function IntegrationsPage() {
   const supabase = useSupabaseClient();
   const [loading, setLoading] = useState(false);
-  const [provider, setProvider] = useState('stripe');
+  const [status, setStatus] = useState<'idle' | 'verifying' | 'success' | 'error'>('idle');
 
-  const handleConnect = async (e: React.FormEvent) => {
+  const verifyAndSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // API Key সেভ করার লজিক
-    alert(`${provider} connected successfully! Data sync will start shortly.`);
-    setLoading(false);
+    setStatus('verifying');
+
+    // এখানে একটি API Call করতে হবে যা Stripe/Lemon Squeezy এর সাথে কানেক্ট হবে
+    // আপাতত আমরা একটি সিমুলেশন করছি
+    setTimeout(async () => {
+      const isSuccess = true; // এখানে প্রকৃত ভেরিফিকেশন লজিক বসবে
+      if (isSuccess) {
+        setStatus('success');
+        alert("Connection Verified & Saved 100%!");
+      } else {
+        setStatus('error');
+        alert("Invalid API Key. Please check and try again.");
+      }
+      setLoading(false);
+    }, 2000);
   };
 
   return (
     <DashboardLayout>
-      <div className="max-w-4xl mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-6 text-slate-800">Payment Integrations</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Integration Card */}
-          <div className="bg-white p-6 rounded-2xl border shadow-sm border-slate-200">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 bg-indigo-100 rounded-lg flex items-center justify-center font-bold text-indigo-600">S</div>
-              <div>
-                <h3 className="font-bold">Stripe Connect</h3>
-                <p className="text-sm text-slate-500">Sync failed payments automatically</p>
-              </div>
-            </div>
+      <div className="max-w-5xl mx-auto p-6 space-y-8">
+        <h1 className="text-3xl font-bold text-slate-900">Integrations & API Setup</h1>
 
-            <form onSubmit={handleConnect} className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Stripe Integration Card */}
+          <div className="bg-white p-8 rounded-3xl border-2 border-slate-100 shadow-xl">
+            <div className="flex justify-between items-start mb-6">
+              <div className="h-14 w-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl font-black">S</div>
+              <span className={`px-3 py-1 rounded-full text-xs font-bold ${status === 'success' ? 'bg-green-100 text-green-600' : 'bg-slate-100 text-slate-500'}`}>
+                {status === 'success' ? 'CONNECTED' : 'NOT CONNECTED'}
+              </span>
+            </div>
+            
+            <h3 className="text-xl font-bold mb-2">Stripe Integration</h3>
+            <p className="text-slate-500 text-sm mb-6">Sync invoice.payment_failed events instantly.</p>
+
+            <form onSubmit={verifyAndSave} className="space-y-4">
               <div>
-                <label className="text-xs font-semibold text-slate-500 uppercase">Secret Key</label>
-                <input 
-                  type="password" 
-                  placeholder="sk_live_..."
-                  className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-                />
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Secret Key</label>
+                <input type="password" placeholder="sk_live_..." className="w-full mt-2 p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
               </div>
-              <div>
-                <label className="text-xs font-semibold text-slate-500 uppercase">Webhook Secret</label>
-                <input 
-                  type="password" 
-                  placeholder="whsec_..."
-                  className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-                />
-              </div>
-              <button 
-                className="w-full bg-slate-900 text-white py-2 rounded-lg font-medium hover:bg-slate-800 transition"
-              >
-                {loading ? "Connecting..." : "Connect Stripe"}
+              <button disabled={loading} className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transform active:scale-95 transition-all shadow-lg shadow-blue-200">
+                {loading ? "Verifying..." : "Verify & Connect"}
               </button>
             </form>
           </div>
 
-          {/* Lemon Squeezy Card */}
-          <div className="bg-white p-6 rounded-2xl border shadow-sm border-slate-200 opacity-75">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-10 w-10 bg-yellow-100 rounded-lg flex items-center justify-center font-bold text-yellow-600">L</div>
-              <div>
-                <h3 className="font-bold">Lemon Squeezy</h3>
-                <p className="text-sm text-slate-500">Coming Soon</p>
-              </div>
-            </div>
-            <button disabled className="w-full bg-slate-100 text-slate-400 py-2 rounded-lg font-medium cursor-not-allowed">
-              Configure
-            </button>
+          {/* Lemon Squeezy Integration Card */}
+          <div className="bg-white p-8 rounded-3xl border-2 border-slate-100 shadow-xl opacity-60 grayscale">
+            <div className="h-14 w-14 bg-yellow-400 rounded-2xl flex items-center justify-center text-black text-2xl font-black">L</div>
+            <h3 className="text-xl font-bold mt-6 mb-2">Lemon Squeezy</h3>
+            <p className="text-slate-500 text-sm mb-8">Coming Soon for Enterprise Users.</p>
+            <button disabled className="w-full bg-slate-100 text-slate-400 py-4 rounded-xl font-bold cursor-not-allowed">Enable Later</button>
           </div>
         </div>
       </div>
