@@ -11,7 +11,7 @@ export default function WebhookSetup() {
       <div className="max-w-2xl mx-auto p-6 bg-white rounded-2xl border shadow-md">
         <h2 className="text-xl font-bold mb-4 text-indigo-700">Final Step: Active Real-time Sync</h2>
         <p className="text-slate-500 mb-6 text-sm">
-          Copy this URL and paste it into your Stripe Dashboard under <b>Developers > Webhooks</b>. 
+          Copy this URL and paste it into your Stripe Dashboard under <b>Developers {'>'} Webhooks</b>. 
           Enable the event: <code>invoice.payment_failed</code>
         </p>
 
