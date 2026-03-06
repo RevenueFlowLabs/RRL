@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 12, "column": 0}, "map": {"version":3,"sources":["file:///home/user/RRL/src/pages/_app.tsx"],"sourcesContent":["\nimport { AppProps } from 'next/app';\nimport { SessionContextProvider } from '@supabase/auth-helpers-react';\nimport { createClient } from '@supabase/supabase-js';\nimport '../styles/globals.css';\n\nconst supabase = createClient(\n  process.env.NEXT_PUBLIC_SUPABASE_URL!,\n  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!\n);\n\nfunction MyApp({ Component, pageProps }: AppProps) {\n  return (\n    <SessionContextProvider supabaseClient={supabase}>\n      <Component {...pageProps} />\n    </SessionContextProvider>\n  );\n}\n\nexport default MyApp;\n"],"names":[],"mappings":";;;;;AAEA;AACA;;;;;;;;;;;;;;AAGA,MAAM,WAAW,IAAA,2OAAY;AAK7B,SAAS,MAAM,EAAE,SAAS,EAAE,SAAS,EAAY;IAC/C,qBACE,qKAAC,4QAAsB;QAAC,gBAAgB;kBACtC,cAAA,qKAAC;YAAW,GAAG,SAAS;;;;;;;;;;;AAG9B;uCAEe"}}]
+}

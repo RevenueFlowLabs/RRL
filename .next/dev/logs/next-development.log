@@ -1,0 +1,106 @@
+[00:00:00.891] Server  LOG     ✓ Ready in 571ms
+[00:00:04.300] Server  ERROR   ⨯ ./src/pages/_app.tsx:5:1
+Module not found: Can't resolve '../styles/globals.css'
+  3 | import { SessionContextProvider } from '@supabase/auth-helpers-react';
+  4 | import { createClient } from '@supabase/supabase-js';
+> 5 | import '../styles/globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const supabase = createClient(
+  8 |   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:04.300] Server  ERROR   ⨯ ./src/pages/_app.tsx:5:1
+Module not found: Can't resolve '../styles/globals.css'
+  3 | import { SessionContextProvider } from '@supabase/auth-helpers-react';
+  4 | import { createClient } from '@supabase/supabase-js';
+> 5 | import '../styles/globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const supabase = createClient(
+  8 |   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:04.783] Server  ERROR   ⨯ ./src/pages/_app.tsx:5:1
+Module not found: Can't resolve '../styles/globals.css'
+  3 | import { SessionContextProvider } from '@supabase/auth-helpers-react';
+  4 | import { createClient } from '@supabase/supabase-js';
+> 5 | import '../styles/globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const supabase = createClient(
+  8 |   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:04.789] Server  ERROR   ⨯ ./src/pages/_app.tsx:5:1
+Module not found: Can't resolve '../styles/globals.css'
+  3 | import { SessionContextProvider } from '@supabase/auth-helpers-react';
+  4 | import { createClient } from '@supabase/supabase-js';
+> 5 | import '../styles/globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const supabase = createClient(
+  8 |   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:04.796] Server  ERROR   ⨯ ./src/pages/_app.tsx:5:1
+Module not found: Can't resolve '../styles/globals.css'
+  3 | import { SessionContextProvider } from '@supabase/auth-helpers-react';
+  4 | import { createClient } from '@supabase/supabase-js';
+> 5 | import '../styles/globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const supabase = createClient(
+  8 |   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:04.797] Server  ERROR   ⨯ ./src/pages/_app.tsx:5:1
+Module not found: Can't resolve '../styles/globals.css'
+  3 | import { SessionContextProvider } from '@supabase/auth-helpers-react';
+  4 | import { createClient } from '@supabase/supabase-js';
+> 5 | import '../styles/globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const supabase = createClient(
+  8 |   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:04.964] Server  ERROR   ⨯ ./src/pages/_app.tsx:5:1
+Module not found: Can't resolve '../styles/globals.css'
+  3 | import { SessionContextProvider } from '@supabase/auth-helpers-react';
+  4 | import { createClient } from '@supabase/supabase-js';
+> 5 | import '../styles/globals.css';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const supabase = createClient(
+  8 |   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+

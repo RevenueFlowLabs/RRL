@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///home/user/RRL/src/pages/index.tsx"],"sourcesContent":["import { useEffect } from 'react';\nimport { useRouter } from 'next/router';\nimport { useUser } from '@supabase/auth-helpers-react';\n\nexport default function Home() {\n  const router = useRouter();\n  const user = useUser();\n\n  useEffect(() => {\n    if (!user) {\n      router.push('/login');\n    } else {\n      router.push('/dashboard');\n    }\n  }, [user, router]);\n\n  return <div className=\"flex h-screen items-center justify-center\">Loading...</div>;\n}"],"names":[],"mappings":";;;;;AAAA;AACA;AACA;;;;;AAEe,SAAS;IACtB,MAAM,SAAS,IAAA,oIAAS;IACxB,MAAM,OAAO,IAAA,6PAAO;IAEpB,IAAA,gHAAS,EAAC;QACR,IAAI,CAAC,MAAM;YACT,OAAO,IAAI,CAAC;QACd,OAAO;YACL,OAAO,IAAI,CAAC;QACd;IACF,GAAG;QAAC;QAAM;KAAO;IAEjB,qBAAO,qKAAC;QAAI,WAAU;kBAA4C;;;;;;AACpE"}}]
+}
