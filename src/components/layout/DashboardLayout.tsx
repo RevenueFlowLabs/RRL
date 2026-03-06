@@ -1,48 +1,13 @@
+import Link from "next/link"
+import { Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, ShoppingCart, Users } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
-import Link from "next/link";
-import { Bell, Home, LineChart, Package, Package2, Settings, ShoppingCart, Users } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import SystemStatusWidget from "../widgets/SystemStatusWidget";
-import TestModeWidget from "../widgets/TestModeWidget";
-import { useEffect, useState } from "react";
-import { createClient, User } from '@supabase/supabase-js';
-import { useRouter } from "next/router";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
-export function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    async function getUser() {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    }
-    getUser();
-  }, []);
-
-  useEffect(() => {
-    async function checkOnboarding() {
-      if (!user) return;
-      const { data: creds } = await supabase
-        .from('client_api_credentials')
-        .select('profile_completion_pct')
-        .single();
-
-      // If the profile is not 100% complete, it will redirect to the settings page
-      if (!creds || creds.profile_completion_pct < 100) {
-        router.push('/settings/integrations?onboarding=true');
-      }
-    }
-    checkOnboarding();
-  }, [user, router]);
-
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -52,52 +17,36 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <Package2 className="h-6 w-6" />
               <span className="">Acme Inc</span>
             </Link>
-          
-              <Bell<Button variant="outline" size="icon" className="ml-auto"></Bell> className="h-4 w-4" />
+            <Button className="ml-auto">
+              <Bell className="h-4 w-4" />
               <span className="sr-only">Toggle notifications</span>
             </Button>
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
+              <Link href="/dashboard" className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
                 <Home className="h-4 w-4" />
                 Dashboard
-              </Link>
-              <Link
-                href="/payments"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <ShoppingCart className="h-4 w-4" />
-                Payments
-              </Link>
-              <Link
-                href="/settings/profile"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-              >
-                <Users className="h-4 w-4" />
-                Profile
-              </Link>
-              <Link
-                href="/settings/config"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <LineChart className="h-4 w-4" />
-                Config
               </Link>
             </nav>
           </div>
         </div>
       </div>
       <div className="flex flex-col">
+        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+          <div className="w-full flex-1">
+            <form>
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input type="search" placeholder="Search products..." className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3" />
+              </div>
+            </form>
+          </div>
+        </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <SystemStatusWidget />
-          <TestModeWidget />
           {children}
         </main>
       </div>
     </div>
-  );
+  )
 }
