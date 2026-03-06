@@ -1,18 +1,9 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useUser } from '@supabase/auth-helpers-react';
-
 export default function Home() {
-  const router = useRouter();
-  const user = useUser();
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    } else {
-      router.push('/dashboard');
-    }
-  }, [user, router]);
-
-  return <div className="flex h-screen items-center justify-center">Loading...</div>;
+  return (
+    <div style={{ textAlign: 'center', marginTop: '100px', fontFamily: 'sans-serif' }}>
+      <h1>Revenue Recovery Labs</h1>
+      <p>System is Live. Dashboard is ready at /dashboard</p>
+      <a href="/dashboard" style={{ color: 'blue', textDecoration: 'underline' }}>Go to Dashboard</a>
+    </div>
+  )
 }
