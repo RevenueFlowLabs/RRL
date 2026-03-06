@@ -52,8 +52,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <Package2 className="h-6 w-6" />
               <span className="">Acme Inc</span>
             </Link>
-            <Button variant="outline" size="icon" className="ml-auto">
-              <Bell className="h-4 w-4" />
+          
+              <Bell<Button variant="outline" size="icon" className="ml-auto"></Bell> className="h-4 w-4" />
               <span className="sr-only">Toggle notifications</span>
             </Button>
           </div>
