@@ -1,28 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }) {
   return (
-    <div className="flex min-h-screen bg-slate-50 font-sans">
+    <div className="flex min-h-screen bg-[#f8fafc]">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-white flex flex-col fixed h-full">
-        <div className="p-6 text-2xl font-bold border-b border-slate-800 text-blue-400">RRL Admin</div>
-        <nav className="flex-1 p-4 space-y-2">
-          <Link href="/dashboard" className="block p-3 rounded-lg hover:bg-slate-800 transition font-medium">🏠 Overview</Link>
-          <Link href="/integrations" className="block p-3 rounded-lg hover:bg-slate-800 transition font-medium">🔌 Integrations</Link>
-          <Link href="/billing" className="block p-3 rounded-lg hover:bg-slate-800 transition font-medium">💳 Billing</Link>
-          <Link href="/settings" className="block p-3 rounded-lg hover:bg-slate-800 transition font-medium">⚙️ Settings</Link>
+      <aside className="w-64 bg-slate-900 text-white p-6 hidden md:block">
+        <h2 className="text-xl font-bold mb-10 text-blue-400">RevenueFlow AI</h2>
+        <nav className="space-y-4">
+          <Link href="/dashboard" className="block p-3 hover:bg-slate-800 rounded-lg">📊 Dashboard</Link>
+          <Link href="/settings" className="block p-3 hover:bg-slate-800 rounded-lg">⚙️ Settings</Link>
+          <Link href="/admin" className="block p-3 hover:bg-slate-800 rounded-lg text-red-400">🛡️ Super Admin</Link>
         </nav>
-        <div className="p-6 border-t border-slate-800">
-          <Link href="/" className="text-sm text-slate-400 hover:text-white">← Back to Site</Link>
-        </div>
       </aside>
 
-      {/* Main Content Area */}
-      <main className="flex-1 ml-64 p-8">
-        <header className="mb-8 flex justify-between items-center">
-          <div className="text-slate-400 text-sm italic">Status: System Online</div>
-          <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold">U</div>
+      {/* Main Content */}
+      <main className="flex-1 p-8">
+        <header className="flex justify-between items-center mb-8 border-b pb-4">
+          <Link href="/" className="text-slate-500 hover:text-blue-600">← Back to Home</Link>
+          <div className="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-bold">Pro Account</div>
         </header>
         {children}
       </main>
