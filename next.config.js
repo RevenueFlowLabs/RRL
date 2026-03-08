@@ -5,6 +5,12 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
-  }
+  },
+  // Added to bypass turbopack error
+  experimental: {
+    turbo: {
+      rules: {},
+    },
+  },
 }
 module.exports = nextConfig
