@@ -1,53 +1,61 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { TrendingUp, Users, DollarSign, Activity } from 'lucide-react';
 
-const data = [
-  { name: 'Jan', revenue: 4000 },
-  { name: 'Feb', revenue: 3000 },
-  { name: 'Mar', revenue: 2000 },
-  { name: 'Apr', revenue: 2780 },
-  { name: 'May', revenue: 1890 },
-  { name: 'Jun', revenue: 2390 },
-];
+const Dashboard = () => {
+  const stats = [
+    { name: 'Total Revenue Recovered', value: '$2,450,000', change: '+12.5%', icon: DollarSign },
+    { name: 'Active SaaS Partners', value: '150+', change: '+3.2%', icon: Users },
+    { name: 'Recovery Accuracy', value: '99.9%', change: 'Stable', icon: Activity },
+    { name: 'Monthly Growth', value: '24%', change: '+4.1%', icon: TrendingUp },
+  ];
 
-export default function Dashboard() {
   return (
-    <div className="p-8 bg-slate-50 min-h-screen font-sans">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-slate-900 mb-8">Revenue Analytics</h1>
+    <div className="min-h-screen bg-slate-50 p-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl font-bold text-slate-900 mb-8">Revenue Recovery Analytics</h1>
         
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <p className="text-slate-500 text-sm font-medium">Recovered This Month</p>
-            <h2 className="text-4xl font-bold text-blue-600">$12,450</h2>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <p className="text-slate-500 text-sm font-medium">Recovery Rate</p>
-            <h2 className="text-4xl font-bold text-emerald-500">88.4%</h2>
-          </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <p className="text-slate-500 text-sm font-medium">Active AI Workflows</p>
-            <h2 className="text-4xl font-bold text-slate-800">12</h2>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((item) => (
+            <div key={item.name} className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-2 bg-blue-50 rounded-lg">
+                  <item.icon className="w-6 h-6 text-blue-600" />
+                </div>
+                <span className={`text-sm font-medium ${item.change.startsWith('+') ? 'text-green-600' : 'text-slate-500'}`}>
+                  {item.change}
+                </span>
+              </div>
+              <h3 className="text-slate-500 text-sm font-medium">{item.name}</h3>
+              <p className="text-2xl font-bold text-slate-900">{item.value}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Chart Section */}
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 mb-8">
-          <h3 className="text-lg font-semibold mb-6">Revenue Recovery Trends</h3>
-          <div className="h-64 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
-                <Tooltip cursor={{fill: '#f8fafc'}} contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}} />
-                <Bar dataKey="revenue" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={40} />
-              </BarChart>
-            </ResponsiveContainer>
+        {/* Live Feed Placeholder */}
+        <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-slate-900">Recent Recovery Activity</h2>
+            <button className="text-blue-600 text-sm font-medium hover:underline">View All</button>
+          </div>
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <div>
+                    <p className="text-sm font-medium text-slate-900">Payment Recovered from Customer #{i * 1234}</p>
+                    <p className="text-xs text-slate-500">2 minutes ago via Stripe</p>
+                  </div>
+                </div>
+                <span className="font-semibold text-slate-900">+$129.00</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Dashboard;
